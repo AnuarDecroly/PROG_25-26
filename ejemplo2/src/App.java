@@ -10,8 +10,7 @@ public class App {
 
         System.out.println(nombre);
 
-        String texto = " ddslñf-ldsmflÑsdmfmsdfm,sdmfsdmdf,,sdmf,msd.fmsd,fms"
-                + ".d,fm.,sdmdf.,sdmdf,sdmf,smf,msd.,fdmsd,.fm.,s,dmfsdmf.,smd,mf.,sdmf,s,dmdf,sdnfnfn";
+
     
     }
 }
