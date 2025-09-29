@@ -1,34 +1,23 @@
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
 
-        // Esto es un comentario de una linea
+        System.out.println("Introduce el nombre del usuario: ");
+        String name = sc.nextLine();
 
-        /*
-        sadasdsad
-        dfdsfsdf
-        sdfsdfsdf
-        dsfsdf
-         */
+        System.out.println("Introduce la edad del usuario: ");
+        int edad = sc.nextInt();
 
-        /**
-         * @Author: Anuar Khan
-         * @params: none
-         */
+        System.out.println("Introduce el saldo del usuario: ");
+        double saldo = sc.nextDouble();
 
-        System.out.printf("Hello and welcome!");
-
-        int num = -5;
-
-        System.out.println(num);
-
-        num++; // num = num + 1;
-
-        boolean resp = (num > 0 || num < 10);
-
-        Math.pow(3,8);
+        System.out.println("El nombre introducido es: " + name + " su edad es " + edad +
+                " y su saldo es " + saldo + "€");
 
 
     }
