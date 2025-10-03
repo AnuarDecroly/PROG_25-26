@@ -4,7 +4,7 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-
+    
         // Ejercicio 1: Escribe un programa que dé los “buenos días”.
         System.out.println("Ejercicio 01");
         System.out.println("Buenos días futuros programadores\n");
