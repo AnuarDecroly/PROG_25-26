@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import static java.lang.System.exit;
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -58,39 +56,42 @@ public class Main {
         System.out.println("La nota es SOBRESALIENTE.");
     }
 
+    String opcion = "4";
+    do{
+        sc = new Scanner(System.in);
+        System.out.println("\nEscoja la opcion deseada de las siguientes opciones:");
+        System.out.println("1. Ingresar datos");
+        System.out.println("2. Ver todos los datos");
+        System.out.println("3. Eliminar");
+        System.out.println("4. Salir");
 
-    sc = new Scanner(System.in);
-    System.out.println("\nEscoja la opcion deseada de las siguientes opciones:");
-    System.out.println("1. Ingresar datos");
-    System.out.println("2. Ver todos los datos");
-    System.out.println("3. Eliminar");
-    System.out.println("4. Salir");
+        opcion = sc.next();
+        switch (opcion) {
+            case "1":
+                sc = new Scanner(System.in);
+                System.out.println("Ingrese el valor del alumno:");
+                String nombre = sc.nextLine();
+                break;
 
-    String opcion = sc.next();
-    switch (opcion) {
-        case "1":
-            sc = new Scanner(System.in);
-            System.out.println("Ingrese el valor del alumno:");
-            String nombre = sc.nextLine();
-            break;
+            case "2":
+                System.out.println("La clase contiene estos alumnos:");
+                break;
 
-        case "2":
-            System.out.println("La clase contiene estos alumnos:");
-            break;
+            case "3":
+                System.out.println("Se han eliminado todos los alumnos");
+                break;
 
-        case "3":
-            System.out.println("Se han eliminado todos los alumnos");
-            break;
+            case "4":
+                System.out.println("Se va a cerrar el programa");
+                System.exit(0);
+                break;
 
-        case "4":
-            System.out.println("Se va a cerrar el programa");
-            System.exit(0);
-            break;
+            default:
+                System.out.println("Por favor escoga una opcion correcta");
 
-        default:
-            System.out.println("Por favor escoga una opcion correcta");
+        }
+    }while(!opcion.equals("4"));
 
-    }
 
         // Nuevo sintaxis Switch Expression
         int nota2 = 3;
@@ -120,5 +121,19 @@ public class Main {
         }
         System.out.println("La suma de los alumnos es:" + sumaN);
 
+        int contador = 0;
+        int suma2 = 0;
+        while(contador < 10) {
+            System.out.println("El numero es: " + contador);
+            suma2 = suma2 + contador;
+            contador++;
+        }
+        System.out.println("La suma de los alumnos es:" + suma2);
+
+        while(true){
+            continue;
+            //return;
+
+        }
     }//main
 }//class
