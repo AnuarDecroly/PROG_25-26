@@ -11,6 +11,7 @@ public class Main {
         Ejercicio 1: Escribe un programa que pide la edad por teclado y
         nos muestra el mensaje de “Eres mayor de edad” solo si lo somos
          */
+        System.out.println("\nEjercicio 01");
         System.out.println("Introduce la edad: ");
         int edad = sc.nextInt();
 
@@ -22,6 +23,7 @@ public class Main {
         Ejercicio 2: Escribe un programa que pide la edad por teclado y
         nos muestra el mensaje de “Eres mayor de edad”  o el mensaje eres menor de edad
         */
+        System.out.println("\nEjercicio 02");
         sc = new Scanner(System.in);
         System.out.println("Introduce la edad: ");
         int edad2 = sc.nextInt();
@@ -39,6 +41,7 @@ public class Main {
         /*
         Ejercicio 3: Realiza un programa que muestre por pantalla los 20 primeros números naturales
         */
+        System.out.println("\nEjercicio 03");
         for(int i = 1; i <= 20; i++){
             System.out.println("El numero natural es: "+i);
         }
@@ -47,6 +50,7 @@ public class Main {
         Ejercicio 4: Realiza un programa que muestre los números pares comprendidos entre el 1 y el 200.
         Para ello utiliza un contador y suma de 2 en 2.
         */
+        System.out.println("\nEjercicio 04");
         for(int i = 2; i <= 200; i = i + 2){
             System.out.println("El par es: "+i);
         }
@@ -55,6 +59,7 @@ public class Main {
         Ejercicio 5: Realiza un programa que muestre los números pares comprendidos entre el 1 y el 200.
         Para ello utiliza un contador y suma de 1 en 1.
         */
+        System.out.println("\nEjercicio 05");
         for(int i = 1; i <= 200; i++){
             if( i % 2 == 0){
                 System.out.println("El par es: "+i);
@@ -65,6 +70,7 @@ public class Main {
         Ejercicio 6: Realiza un programa que muestre los números desde
         el 1 hasta un número N que se introducirá por teclado.
         */
+        System.out.println("\nEjercicio 06");
         sc = new Scanner(System.in);
         System.out.println("Introduce un numero: ");
         int num = sc.nextInt();
@@ -77,6 +83,7 @@ public class Main {
         Ejercicio 7: Escribe un programa que lea una calificación numérica entre
         0 y 10 y la transforma en calificación alfabética, escribiendo el resultado.
         */
+        System.out.println("\nEjercicio 07");
         sc = new Scanner(System.in);
         System.out.println("Introduce la calificacion: ");
         double nota = sc.nextDouble();
@@ -112,6 +119,7 @@ public class Main {
         Ejercicio 8: Realiza un programa que lea un número positivo N
         y calcule y visualice su factorial N!.
         */
+        System.out.println("\nEjercicio 08");
         sc = new Scanner(System.in);
         System.out.println("Introduce un numero: ");
         int num2 = sc.nextInt();
@@ -122,8 +130,16 @@ public class Main {
             factorial = factorial * i;
         }
         System.out.println("El factorial es: " + factorial);
-        
 
+
+        System.out.println("\nEjercicio 09");
+
+
+
+        System.out.println("\nEjercicio 10");
+
+
+        System.out.println("\nEjercicio 11");
 
     }
 }
