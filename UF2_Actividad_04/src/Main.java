@@ -242,17 +242,30 @@ public class Main {
         System.out.println("Personas por encima de la media: " + contadorAlturas);
         System.out.println("Persona por debajo de la media: " + (Math.abs(alturas.length - contadorAlturas)));
 
-
-
-
-
         /*
         Ej 11: Crea un programa que cree dos arrays de enteros de tamaño 100. Luego introducirá en el
         primer array todos los valores del 1 al 100. Por último, deberá copiar todos los valores del
         primer array al segundo array en orden inverso, y mostrar ambos por pantalla.
         */
         sc = new Scanner(System.in);
+        int [] array1 =   new int [100];
+        int [] array2 =   new int [100];
 
+        for(int i = 0; i < array1.length; i++){
+            array1[i] = i + 1;
+        }
+
+        for(int i = 0; i < array2.length; i++){
+            array2[i] = array1[(array1.length - 1) - i ];
+        }
+
+        //Opcion 1: menos codigo
+        System.out.println(Arrays.toString(array2));
+
+        //Opcion 2: Si no recordamos la clase Arrays
+        for(int num : array2){
+            System.out.println(num);
+        }
 
         /*
         Ej 12: Crea un programa que cree un array de 10 enteros y luego muestre el siguiente menú con
@@ -265,7 +278,46 @@ public class Main {
         elija la opción ‘c’ que terminará el programa.
         */
         sc = new Scanner(System.in);
+        int [] array3 =   new int [10];
 
+        String opcion = "c";
+
+        int contadorPosicion = 0;
+        do{
+            System.out.println("Escoja la opcion deseada: ");
+            System.out.println("a. Mostrar valores");
+            System.out.println("b. Introducir valor: ");
+            System.out.println("c. Salir");
+            opcion = sc.nextLine();
+
+
+            switch (opcion) {
+                case "a":
+                    System.out.println(Arrays.toString(array3));
+                    break;
+
+                case "b":
+                    sc = new Scanner(System.in);
+                    System.out.println("Introduce la posicion donde quieras insertar el valor: ");
+                    contadorPosicion = sc.nextInt();
+                    if(contadorPosicion < array3.length && contadorPosicion >= 0){
+                        array3[contadorPosicion] = sc.nextInt();
+                    }
+                    else{
+                        System.out.println("No se pueden insertar porque la posicion no coincide");
+                    }
+                    break;
+
+                case "c":
+                    System.out.println("El menu se cerrara");
+                    break;
+
+                default:
+                    System.out.println("Por favor escoja una opcion correcta");
+
+            }
+
+        }while(!opcion.equals("c")); //opcion.equals("c") == false
 
         /*
         Ej 13: Crea un programa que permita al usuario almacenar una secuencia aritmética en un array y
@@ -275,7 +327,21 @@ public class Main {
         N (nº de valores a crear).
         */
         sc = new Scanner(System.in);
+        System.out.println("Introduce el valor inicial V: ");
+        int vInicial = sc.nextInt();
+        System.out.println("Introduce el incremento I: ");
+        int iInicial = sc.nextInt();
+        System.out.println("Introduce la cantidad de valores que se desean obtener: ");
+        int cantidadN = sc.nextInt();
 
+        int[] valores = new int[cantidadN];
+        valores[0] = vInicial;
+
+        for(int i = 1; i < valores.length; i++){
+            valores[i] = valores[i-1] + iInicial;
+        }
+
+        System.out.println(Arrays.toString(valores));
 
         /*
         Ej 14: Crea un programa que cree un array de enteros e introduzca la siguiente secuencia de valores:
@@ -283,7 +349,48 @@ public class Main {
         y luego la muestre por pantalla.
         */
         sc = new Scanner(System.in);
+        // --- 1. Calcular el tamaño del array ---
+        // Necesitamos sumar 1 + 2 + 3 + ... + 10.
+        // Usamos la fórmula de la suma de Gauss: n * (n + 1) / 2
+        int n14 = 10;
+        int tamanoArray = n14 * (n14 + 1) / 2; // Esto da 10 * 11 / 2 = 55
 
+        int[] secuencia = new int[tamanoArray];
+
+        // Usamos 'indiceActual' para saber en qué posición del array estamos escribiendo.
+        int indiceActual = 0;
+
+        // El bucle exterior itera sobre el NÚMERO que queremos insertar (del 1 al 10)
+        for (int numero = 1; numero <= n14; numero++) {
+
+            // El bucle interior repite la inserción 'numero' veces
+            // (Ej: si numero=3, repite 3 veces)
+            for (int i = 0; i < numero; i++) {
+
+                // Asignamos el número a la posición actual
+                secuencia[indiceActual] = numero;
+
+                // Avanzamos a la siguiente posición del array
+                indiceActual++;
+            }
+        }
+
+        System.out.println("Array con la secuencia generada:");
+        System.out.println(Arrays.toString(secuencia));
+
+
+        //Ejemplo String split y forEach
+
+        String frase = "En un lugar de la Mancha de cuyo nombre no quiero acordarme";
+        String [] palabras = frase.split(" ");
+
+//        for(int i = 0; i < palabras.length; i++){
+//            System.out.println(palabras[i]);
+//        }
+
+        for(String palabra : palabras){
+            System.out.println(palabra);
+        }
 
     }//main
 }//class
