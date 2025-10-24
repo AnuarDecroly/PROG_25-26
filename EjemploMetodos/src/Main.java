@@ -85,5 +85,29 @@ public class Main {
         max = Math.max(Math.max(a,b), c);
         return max;
     }
+    //Ejemplos de metodos para leer numeros y mensajes
+    public double leerNumeroReal(String mensaje){
+        Scanner sc = new Scanner(System.in);
+        System.out.print(mensaje);
+        double resultado = sc.nextDouble();
+        sc.close();
+        return resultado;
+    }
+
+    public int leerNumeroEntero(String mensaje){
+        Scanner sc = new Scanner(System.in);
+        System.out.print(mensaje);
+        int resultado = sc.nextInt();
+        sc.close();
+        return resultado;
+    }
+
+    public String leerTexto(String mensaje){
+        Scanner sc = new Scanner(System.in);
+        System.out.print(mensaje);
+        String resultado = sc.nextLine();
+        sc.close();
+        return resultado;
+    }
 
 }//clase
