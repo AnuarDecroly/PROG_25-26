@@ -42,7 +42,7 @@ public class Main {
         los almacene en un array, y luego lo recorra para averiguar el máximo y mínimo y mostrarlos por pantalla.
         */
         double [] numerosReales3 = new double [10];
-        double max = Double.MIN_VALUE,   min = Double.MAX_VALUE;
+        double max = - Double.MAX_VALUE,   min = Double.MAX_VALUE;
 
         for (int i = 0; i < numerosReales3.length; i++) {
             System.out.println("Introduce el numero real " + (i+1) + ": ");
@@ -215,7 +215,7 @@ public class Main {
         System.out.println("Introduce el valor de N");
         int nAlturas = sc.nextInt();
         double [] alturas = new double [nAlturas];
-        double sumaAlturas = 0.0, mediaAlturas = 0.0, maximaAlturas = Double.MIN_VALUE, minimaAlturas = Double.MAX_VALUE;
+        double sumaAlturas = 0.0, mediaAlturas = 0.0, maximaAlturas = -Double.MAX_VALUE, minimaAlturas = Double.MAX_VALUE;
 
         for(int i = 0; i < alturas.length ; i++){
             System.out.println("Introduce el valor de la altura " + (i+1) + ": ");

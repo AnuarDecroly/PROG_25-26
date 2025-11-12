@@ -113,7 +113,7 @@ public class Main {
         }
 
         for (int i = 0; i < matriz4.length; i++) {
-            estadisticas[i][0] = Double.MIN_VALUE;
+            estadisticas[i][0] = - Double.MAX_VALUE;
             estadisticas[i][1] = Double.MAX_VALUE;
             estadisticas[i][2] = 0.0;
             for (int j = 0; j < matriz4[i].length; j++) {
