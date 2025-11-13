@@ -1,5 +1,12 @@
 public class Biblioteca {
 
+    //Atributo estatico contador total de libros que ha habido en la biblioteca
+    private static int contadorTotal = 0;
+
+    public static int getContadorTotal() {
+        return contadorTotal;
+    }
+
     //Atributos encapsulados
     private String codigo;
     private String nombre;
@@ -64,6 +71,8 @@ public class Biblioteca {
                 this.libros[this.nLibrosActuales] = libro;
                 resultado = true;
                 this.nLibrosActuales++;
+
+                contadorTotal++;
             }
             else{
                 //No tengo huecos suficientes
@@ -71,6 +80,8 @@ public class Biblioteca {
                 this.libros[this.nLibrosActuales] = libro;
                 resultado = true;
                 this.nLibrosActuales++;
+
+                contadorTotal++;
 
             }
 

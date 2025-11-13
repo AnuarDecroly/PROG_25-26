@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -89,6 +91,8 @@ public class Main {
 
         Libro lEliminar = biblio.getLibroByISBN(isbnEliminar);
         biblio.eliminarLibro(lEliminar);
+
+        System.out.println(Biblioteca.getContadorTotal());
 
 
 

@@ -1,6 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Libro {
 
+    private static int contadorTotal = 0;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
     //Atributos o campos de la clase (encapsulacion)
+    private final int id;
     private String titulo;
     private String autor;
     private int nPaginas;
@@ -19,6 +26,12 @@ public class Libro {
         this.edicion = 1;
         this.nPaginas = 1;
         this.editora = "Auto-Publicacion";
+
+        this.id = contadorTotal;
+        contadorTotal++;
+
+        //Ejemplo de fecha instantanea
+        this.fechaPublicacion = LocalDateTime.now().format(dtf);
     }
 
     //Constructor con todos los atributos
@@ -31,11 +44,21 @@ public class Libro {
         this.edicion = edicion;
         this.setnPaginas(nPaginas);
         this.editora = editora;
+
+        this.id = contadorTotal;
+        contadorTotal++;
+
+        //Ejemplo de fecha instantanea
+        this.fechaPublicacion = LocalDateTime.now().format(dtf);
     }
 
     /*
         DEFINIMOS LOS GETTER Y SETTER DE LOS ATRIBUTOS
     */
+
+    public int getId() {
+        return id;
+    }
 
     public String getTitulo() {
         return this.titulo;
