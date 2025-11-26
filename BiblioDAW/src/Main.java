@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -6,33 +7,45 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+
+
+            //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        System.out.println(LocalDateTime.now().format(dtf));
+
+        //Pedir por pantalla fecha
+        String fechaTeclado = "23-7-2023 15:00:45";
+        LocalDateTime.parse(fechaTeclado, dtf);
+
+        long miEpoch =  LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+        LocalDateTime miFecha = LocalDateTime.ofEpochSecond(miEpoch, 0, ZoneOffset.UTC);
+
         MiUtils.comprobarPatronRepetidamente("[0-9]{7}[a-z A-Z]{1}", "Introduzca el dni");
 
         Biblioteca biblio = new Biblioteca("Bib001", "BMS Jado",
                 "Pase de Altamira 23", "info@bmsjado.es", "942-20-23-25");
 
         Libro l1 = new Libro("La comunidad del anillo", "JRR Tolkien",
-                "ISBN123", "23-7-1942");
+                "ISBN123", "23-7-1942", Genero.FANTASIA);
         Libro l2 = new Libro("Las dos torres", "JRR Tolkien",
-                "ISBN456", "23-7-1944");
+                "ISBN456", "23-7-1944", Genero.FANTASIA);
         Libro l3 = new Libro("El retorno del Rey", "JRR Tolkien",
-                "ISBN789", "23-7-1946");
+                "ISBN789", "23-7-1946",  Genero.FANTASIA);
         Libro l4 = new Libro("Juegos de tronos", "GRR Martin",
-                "ISBN333", "23-7-1992");
+                "ISBN333", "23-7-1992", Genero.FANTASIA);
         Libro l5 = new Libro("Choque de reyes", "GRR Martin",
-                "ISBN333", "23-7-1992");
+                "ISBN333", "23-7-1992", Genero.FANTASIA);
         Libro l6 = new Libro("Tormenta de espadas", "GRR Martin",
-                "ISBN333", "23-7-1992");
+                "ISBN333", "23-7-1992",  Genero.FANTASIA);
         Libro l7 = new Libro("Festin de cuervos", "GRR Martin",
-                "ISBN333", "23-7-1992");
+                "ISBN333", "23-7-1992", Genero.FANTASIA);
         Libro l8 = new Libro("Danza de dragones", "GRR Martin",
-                "ISBN334", "23-7-2011");
+                "ISBN334", "23-7-2011", Genero.FANTASIA);
         Libro l9 = new Libro("El nombre del viento", "Patrick Rothfus",
-                "ISBN335", "23-7-2006");
+                "ISBN335", "23-7-2006", Genero.FANTASIA);
         Libro l10 = new Libro("El temor de un hombre sabio", "Patrick Rothfus",
-                "ISBN335", "23-7-2011");
+                "ISBN335", "23-7-2011", Genero.HISTORICA);
 
         boolean estado = biblio.insertarLibro(l1);
         if (estado) {
@@ -68,7 +81,7 @@ public class Main {
         System.out.print("Ingrese el fecha de publicacion del libro: ");
         fechaPublicacion = sc.nextLine();
 
-        Libro lTeclado = new Libro(titulo, autor, ISBN, fechaPublicacion);
+        Libro lTeclado = new Libro(titulo, autor, ISBN, fechaPublicacion, Genero.SCIFI);
         biblio.insertarLibro(lTeclado);
 
         System.out.println(biblio.infoBiblioteca());
@@ -94,6 +107,20 @@ public class Main {
         biblio.eliminarLibro(lEliminar);
 
         System.out.println(Biblioteca.getContadorTotal());
+
+//        Genero g = Genero.FANTASIA;
+//
+//        switch (g) {
+//            case Genero.FANTASIA:
+//                System.out.print("Mi genero es: " + g.toString());
+//                break;
+//
+//            case HISTORICA:
+//                System.out.print("Mi genero es: " + g.toString());
+//                break;
+//        }
+
+
 
     }
 

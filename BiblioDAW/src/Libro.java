@@ -16,9 +16,11 @@ public class Libro {
     private String fechaPublicacion;
     private int edicion;
 
+    private Genero genero;
+
     //Constructor / Constructores
     //Constructor con atributos imprescindibles
-    public Libro(String titulo, String autor, String ISBN, String fechaPublicacion) {
+    public Libro(String titulo, String autor, String ISBN, String fechaPublicacion, Genero genero) {
         this.titulo = titulo;
         this.autor = autor;
         this.ISBN = ISBN;
@@ -26,6 +28,7 @@ public class Libro {
         this.edicion = 1;
         this.nPaginas = 1;
         this.editora = "Auto-Publicacion";
+        this.genero = genero;
 
         this.id = contadorTotal;
         contadorTotal++;
