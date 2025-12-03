@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-public class Alumno extends Persona {
+public class Alumno extends Persona  implements IEspanol{
     private String nExpediente;
     private String ciclo;
     private String curso;
@@ -56,5 +56,20 @@ public class Alumno extends Persona {
 
         }
         return notasString;
+    }
+
+    @Override
+    public void siesta(int duracion) {
+
+    }
+
+    @Override
+    public void salirTapas() {
+
+    }
+
+    @Override
+    public void tomarCopas() {
+
     }
 }
