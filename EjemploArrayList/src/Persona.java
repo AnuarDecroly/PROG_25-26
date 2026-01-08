@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Persona {
+public class Persona implements Comparable<Persona>{
 
     private String dni;
     private String nombre;
@@ -74,5 +74,13 @@ public class Persona {
     @Override
     public int hashCode() {
         return Objects.hash(dni, nombre, apellido);
+    }
+
+    @Override
+    public int compareTo(Persona o) {
+        if(o != null){
+            return this.dni.compareTo(o.dni);
+        }
+        return 1;
     }
 }
