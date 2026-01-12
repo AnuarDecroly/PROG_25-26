@@ -77,9 +77,10 @@ public class Persona implements Comparable<Persona>{
 
     @Override
     public int compareTo(Persona o) {
-        if(o != null){
+        if (o != null) {
             return this.dni.compareTo(o.dni);
         }
         return 1;
     }
+
 }
