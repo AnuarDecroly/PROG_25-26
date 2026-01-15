@@ -43,6 +43,7 @@ public class Main {
         }
 
 
+        //Opcion 1: Para arrayList, poco eficiente para linkedList y no se puede con conjuntos
         System.out.println("\n");
         int index = -1;
         for(Persona p : personas){
@@ -54,6 +55,21 @@ public class Main {
 
         }
         personas.remove(index);
+
+        //Opcion 2 de eliminar: para conjuntos, linkedlist y arraylist
+        System.out.println("\n");
+        Persona pAux = null;
+        for(Persona p : personas){
+            if(p.getDni().equals(p1.getDni())){
+                pAux = p;
+                break;
+            }
+        }
+        boolean resultado = false;
+        if(pAux != null){
+            resultado = personas.remove(pAux);
+        }
+
 
 
         System.out.println("\n AQUI EMPIEZA LINKEDLIST");
