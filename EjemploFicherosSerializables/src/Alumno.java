@@ -9,10 +9,10 @@ public class Alumno implements Serializable {
     @Serial
     private static final long serialVersionUID = -4316273174281088381L;
 
-    private String nombre;
-    private String apellido;
-    private String email;
-    private int edad;
+    String nombre;
+    String apellido;
+    String email;
+    int edad;
 
     private List<Calificacion> calificaciones;
 

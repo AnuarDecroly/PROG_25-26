@@ -11,7 +11,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        final String path = "./src/resources/";
+        final String pathNew = "./src/resources/";
         final String fileName = "alumnos.dat";
         boolean fileMode = false;
 
@@ -42,16 +42,7 @@ public class Main {
         alumnos.add(adolf);
 
         //Usar try-cath-with resources
-        try(FileOutputStream file = new FileOutputStream(path+fileName, fileMode);
-        ObjectOutputStream buffer = new ObjectOutputStream(file)){
-            for(Alumno alumno : alumnos){
-                buffer.writeObject(alumno);
-            }
-            System.out.println("Se ha escrito el fichero correctamente");
-
-        } catch (IOException e) {
-            System.out.println("Error al abrir el archivo: "+e.getMessage());
-        }
+        escribirEnFichero(pathNew, fileName, fileMode, alumnos);
 
 //        //Creacion y/o apertura del archivo
 //        FileOutputStream file;
@@ -81,5 +72,18 @@ public class Main {
 //        }catch (IOException e) {
 //            System.out.println("Error al cerrar el archivo: "+e.getMessage());
 //        }
+    }
+
+    private static void escribirEnFichero(String pathNew, String fileName, boolean fileMode, List<Alumno> alumnos) {
+        try(FileOutputStream file = new FileOutputStream(pathNew + fileName, fileMode);
+            ObjectOutputStream buffer = new ObjectOutputStream(file)){
+            for(Alumno alumno : alumnos){
+                buffer.writeObject(alumno);
+            }
+            System.out.println("Se ha escrito el fichero correctamente");
+
+        } catch (IOException e) {
+            System.out.println("Error al abrir el archivo: "+e.getMessage());
+        }
     }
 }
