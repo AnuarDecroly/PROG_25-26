@@ -10,50 +10,65 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        List<String> heroNames = SQLAccessDCuniverse.getCharactersName();
+//        List<String> heroNames = SQLAccessDCuniverse.getCharactersName();
+//
+//        for(String heroName : heroNames){
+//            System.out.println(heroName);
+//        }
+//
+//        List<Character> characters = SQLAccessDCuniverse.getCharacters();
+//        for(Character character : characters){
+//            System.out.println(character);
+//        }
+//
+//        Scanner scan = new Scanner(System.in);
+//        System.out.print("Enter character ID: ");
+//        int id = scan.nextInt();
+//
+//        Character ch = SQLAccessDCuniverse.getCharacter(id);
+//        System.out.println("\nSoy Batman!!! "+ch);
+//
+//        System.out.print("Enter character name: ");
+//        scan = new Scanner(System.in);
+//        String name = scan.nextLine();
+//        List<Character> ch2 = SQLAccessDCuniverse.getCharacterByName(name);
+//        if(ch2.isEmpty()){
+//            System.out.println("No character found with that name");
+//        }else{
+//            for(Character character : ch2){
+//                System.out.println(character);
+//            }
+//        }
+//
+//        scan = new Scanner(System.in);
+//        System.out.print("Enter character name: ");
+//        String nameHero = scan.nextLine();
+//
+//        System.out.print("Enter characert alter Ego: ");
+//        String alterEgo = scan.nextLine();
+//        List<Character> ch3 = SQLAccessDCuniverse.getCharacterByNameAndAlterEgo(nameHero,alterEgo);
+//        if(ch3.isEmpty()){
+//            System.out.println("No character found with that name and alter Ego");
+//        }else{
+//            for(Character character : ch3){
+//                System.out.println(character);
+//            }
+//        }
+//
+//        int respose = SQLAccessDCuniverse.deleteCharacterById(1);
+//
+//        ch.setFullName("Soy Batman y Bruce Wayne");
+//        int respose2 = SQLAccessDCuniverse.updateCharacter(ch);
+        int respose3 = SQLAccessDCuniverse.
+                insertCharacter(new Character(-1, "Doctor Strange","Stephen Vicent Strange", "male","human", "good"));
 
-        for(String heroName : heroNames){
-            System.out.println(heroName);
-        }
+        //int respose = SQLAccessDCuniverse.deleteCharacterById(12);
 
-        List<Character> characters = SQLAccessDCuniverse.getCharacters();
-        for(Character character : characters){
-            System.out.println(character);
-        }
+        Character chUpdate = SQLAccessDCuniverse.getCharacter(13);
+        chUpdate.setFullName("Anuar Khan Alí");
+        chUpdate.setHeroName("Profesor Khan");
 
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Enter character ID: ");
-        int id = scan.nextInt();
-
-        Character ch = SQLAccessDCuniverse.getCharacter(id);
-        System.out.println("\nSoy Batman!!! "+ch);
-
-        System.out.print("Enter character name: ");
-        scan = new Scanner(System.in);
-        String name = scan.nextLine();
-        List<Character> ch2 = SQLAccessDCuniverse.getCharacterByName(name);
-        if(ch2.isEmpty()){
-            System.out.println("No character found with that name");
-        }else{
-            for(Character character : ch2){
-                System.out.println(character);
-            }
-        }
-
-        scan = new Scanner(System.in);
-        System.out.print("Enter character name: ");
-        String nameHero = scan.nextLine();
-
-        System.out.print("Enter characert alter Ego: ");
-        String alterEgo = scan.nextLine();
-        List<Character> ch3 = SQLAccessDCuniverse.getCharacterByNameAndAlterEgo(nameHero,alterEgo);
-        if(ch3.isEmpty()){
-            System.out.println("No character found with that name and alter Ego");
-        }else{
-            for(Character character : ch3){
-                System.out.println(character);
-            }
-        }
+        SQLAccessDCuniverse.updateCharacter(chUpdate);
 
 
 

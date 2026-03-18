@@ -141,4 +141,81 @@ public class SQLAccessDCuniverse {
 
         return heros;
     }
+
+    public static int deleteCharacterById(int id){
+        int elements = -1;
+        String sqlDeleteCh = "DELETE FROM characters WHERE id = ?";
+        String sqlDeletePS =  "DELETE FROM powerstats WHERE characters_id = ?";
+
+        try(Connection connection = SqlDataManager.getConnection();
+            PreparedStatement statementCh = connection.prepareStatement(sqlDeleteCh);
+            PreparedStatement statementPS = connection.prepareStatement(sqlDeletePS)){
+
+            statementCh.setInt(1, id);
+            statementPS.setInt(1, id);
+
+            elements = statementPS.executeUpdate();
+            elements += statementCh.executeUpdate();
+
+        }catch (SQLException e){
+            System.err.println("SQLException: " + e.getMessage());
+        }
+
+        return elements;
+    }
+
+    public static int insertCharacter(Character hero){
+        int response = -1;
+
+        String sqlStatement = "INSERT INTO characters (heroName, fullName, image1, image2, " +
+                "image3, gender, race, alignment)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try(Connection connection = SqlDataManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sqlStatement)){
+
+            statement.setNString(1, hero.getHeroName());
+            statement.setNString(2, hero.getFullName());
+            statement.setNString(3, "https://placehold.co/300x200/orange/white");
+            statement.setNString(4, "https://placehold.co/300x200/blue/white");
+            statement.setNString(5, "https://placehold.co/300x200/red/white");
+            statement.setNString(6, hero.getGender());
+            statement.setNString(7, hero.getRace());
+            statement.setNString(8, hero.getAlignment());
+
+            response = statement.executeUpdate();
+
+        }catch (SQLException e){
+            System.err.println("SQLException: " + e.getMessage());
+        }
+
+        return response;
+    }
+
+    public static int updateCharacter(Character hero){
+        int response = -1;
+
+        //SOLO estoy actualizando heroName, fullName, aligment
+        String sqlStatement = "UPDATE characters set heroName = ? , " +
+                "fullName = ?, alignment = ? where id = ?";
+
+        try(Connection connection = SqlDataManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sqlStatement);)
+        {
+            //Campos a actualizar
+            statement.setNString(1, hero.getHeroName());
+            statement.setNString(2, hero.getFullName());
+            statement.setNString(3, hero.getAlignment());
+
+            //Heroe que se va a actualizar
+            statement.setInt(4, hero.getId());
+
+            response = statement.executeUpdate();
+
+        }catch (SQLException e){
+            System.err.println("SQLException: " + e.getMessage());
+        }
+
+        return response;
+    }
+
 }
