@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.decroly","l":"Character"},{"p":"com.decroly","l":"Main"},{"p":"com.decroly","l":"SQLAccessDCuniverse"},{"p":"com.decroly","l":"SqlDataManager"}];updateSearchResults();
