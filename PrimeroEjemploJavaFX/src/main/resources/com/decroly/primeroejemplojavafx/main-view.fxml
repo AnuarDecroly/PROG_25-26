@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.decroly.primeroejemplojavafx.MainController">
+   <children>
+      <VBox alignment="CENTER" layoutX="14.0" layoutY="239.0" prefHeight="315.0" prefWidth="540.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <children>
+            <Button mnemonicParsing="false" text="Button">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Button">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Button">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Button">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="-8.0" prefHeight="54.0" prefWidth="640.0">
+         <children>
+            <Button fx:id="button1Hbox" mnemonicParsing="false" text="Button">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Button">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Button">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Button" />
+         </children>
+      </HBox>
+   
+                <Label fx:id="welcomeText" layoutX="233.0" layoutY="301.0" prefHeight="38.0" prefWidth="196.0" />
+       <Button id="holaButton" layoutX="374.0" layoutY="572.0" maxWidth="40.0" minWidth="60.0" onAction="#onHelloButtonClick" prefWidth="60.0" style="-fx-background-color: black;" text="Hola" textFill="#2a8dbe" wrapText="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="374.0" AnchorPane.rightAnchor="26.0">
+         <cursor>
+            <Cursor fx:constant="S_RESIZE" />
+         </cursor>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
