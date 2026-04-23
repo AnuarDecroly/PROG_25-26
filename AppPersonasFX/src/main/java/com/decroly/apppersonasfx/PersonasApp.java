@@ -1,4 +1,4 @@
-package com.decroly.primeroejemplojavafx;
+package com.decroly.apppersonasfx;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,13 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class App extends Application {
+public class PersonasApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(PersonasApp.class.getResource("personas-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 640);
-        scene.getStylesheets().add(App.class.getResource("stylesheet.css").toString());
-        stage.setTitle("Primera APP Java FX");
+        stage.setTitle("App administración Personas");
         stage.setScene(scene);
         stage.show();
     }
