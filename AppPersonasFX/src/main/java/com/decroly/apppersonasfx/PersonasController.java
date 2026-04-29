@@ -8,7 +8,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -19,15 +21,22 @@ import java.util.ResourceBundle;
 public class PersonasController implements Initializable {
     private Persona pp;
     private ObservableList<Persona> personas = FXCollections.observableArrayList();
+
     private String [] estadosLabel= {"Se ha creado el registro correctamente",
             "Error al crear el registro",
             "Se ha producido una excepción",};
 
+    //Variables para poner el boton enable
+    boolean isDniValido = false, isNombreValido = false, isApellidosValido = false,
+    isEmailValido = false, isTelefonoValido = false, isEdadValido = false;
+
+    //Paneles
     @FXML
     private AnchorPane mainView;
-
     @FXML
     private AnchorPane formView;
+    @FXML
+    private AnchorPane listView;
 
     //Campos de texto del formulario
     @FXML
@@ -46,20 +55,39 @@ public class PersonasController implements Initializable {
     @FXML
     private Label infoLabel;
 
+    @FXML
+    private Button guardarFormButton;
+
+    @FXML
+    private ListView<Persona> personasListView;
+
     @Override
     public void initialize(URL location, ResourceBundle resources){
         //Codigo que queremos o necesitamos que se ejecute al principio
-        this.mainView.setVisible(true);
-        this.formView.setVisible(false);
+        this.selectPanelVisible(0);
+
         this.clearFieldTexts();
+        this.guardarFormButton.setDisable(true);
 
         //Insertar listerners a las propiedades de focus tesxtfields
         this.dniTextF.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue){
                 if(!this.validateDni(dniTextF.getText())){
                     this.dniTextF.setText("");
+                    this.dniTextF.getStyleClass().remove("my-validated-text");
+                    this.dniTextF.getStyleClass().add("my-error-text");
+
                     this.dniTextF.setPromptText("Debe ingresar un dni correcto");
+                    this.isDniValido = false;
+
+
                 }
+                else{
+                    this.dniTextF.getStyleClass().remove("my-error-text");
+                    this.dniTextF.getStyleClass().add("my-validated-text");
+                    this.isDniValido = true;
+                }
+                this.guardarFormButton.setDisable(!this.isValidoFormulario());
             }
         });
 
@@ -67,8 +95,17 @@ public class PersonasController implements Initializable {
             if(!newValue){
                 if(!this.validateName(nombreTextF.getText())){
                     this.nombreTextF.setText("");
+                    this.nombreTextF.getStyleClass().remove("my-validated-text");
+                    this.nombreTextF.getStyleClass().add("my-error-text");
                     this.nombreTextF.setPromptText("El nombre debe de tener al menos 3 caracteres");
+                    this.isNombreValido = false;
                 }
+                else{
+                    this.nombreTextF.getStyleClass().remove("my-error-text");
+                    this.nombreTextF.getStyleClass().add("my-validated-text");
+                    this.isNombreValido = true;
+                }
+                this.guardarFormButton.setDisable(!this.isValidoFormulario());
             }
         });
 
@@ -76,9 +113,18 @@ public class PersonasController implements Initializable {
             if(!newValue){
                 if(!this.validateName(apellidosTextF.getText())){
                     this.apellidosTextF.setText("");
+                    this.apellidosTextF.getStyleClass().remove("my-validated-text");
+                    this.apellidosTextF.getStyleClass().add("my-error-text");
                     this.apellidosTextF.setPromptText("El apellido debe de tener al menos 3 caracteres");
+                    this.isApellidosValido = false;
+                }
+                else{
+                    this.apellidosTextF.getStyleClass().remove("my-error-text");
+                    this.apellidosTextF.getStyleClass().add("my-validated-text");
+                    this.isApellidosValido = true;
 
                 }
+                this.guardarFormButton.setDisable(!this.isValidoFormulario());
             }
         });
 
@@ -86,19 +132,36 @@ public class PersonasController implements Initializable {
             if(!newValue){
                 if(!this.validateEmail(emailTextF.getText())){
                     this.emailTextF.setText("");
+                    this.emailTextF.getStyleClass().remove("my-validated-text");
+                    this.emailTextF.getStyleClass().add("my-error-text");
                     this.emailTextF.setPromptText("Ingresa un email valido");
+                    this.isEmailValido = false;
                 }
+                else{
+                    this.emailTextF.getStyleClass().remove("my-error-text");
+                    this.emailTextF.getStyleClass().add("my-validated-text");
+                    this.isEmailValido = true;
+                }
+                this.guardarFormButton.setDisable(!this.isValidoFormulario());
             }
+
         });
 
         this.edadTextF.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue){
                 if(!this.validateAge(edadTextF.getText())){
                     this.edadTextF.setText("");
-
+                    this.edadTextF.getStyleClass().remove("my-validated-text");
                     this.edadTextF.getStyleClass().add("my-error-text");
                     this.edadTextF.setPromptText("La edad debe ser un numero entre 1 y 150");
+                    this.isEdadValido = false;
                 }
+                else{
+                    this.edadTextF.getStyleClass().remove("my-error-text");
+                    this.edadTextF.getStyleClass().add("my-validated-text");
+                    this.isEdadValido = true;
+                }
+                this.guardarFormButton.setDisable(!this.isValidoFormulario());
             }
         });
 
@@ -106,8 +169,17 @@ public class PersonasController implements Initializable {
             if(!newValue){
                 if(!this.validatePhone(telefonoTextF.getText())){
                     this.telefonoTextF.setText("");
+                    this.telefonoTextF.getStyleClass().remove("my-validated-text");
+                    this.telefonoTextF.getStyleClass().add("my-error-text");
                     this.telefonoTextF.setPromptText("El telefono debe tener 9 digitos");
+                    this.isTelefonoValido = false;
                 }
+                else{
+                    this.telefonoTextF.getStyleClass().remove("my-error-text");
+                    this.telefonoTextF.getStyleClass().add("my-validated-text");
+                    this.isTelefonoValido = true;
+                }
+                this.guardarFormButton.setDisable(!this.isValidoFormulario());
             }
         });
 
@@ -119,12 +191,10 @@ public class PersonasController implements Initializable {
             //Pintamos el numero de elementos que encontramos
             this.infoLabel.setText(personas.size() + " personas encontrados");
             //Lo comento para que no sea vea, ya que es una prueba.
-            //this.infoLabel.setVisible(true);
+            this.infoLabel.setVisible(true);
         });
 
     }
-
-
 
     @FXML
     public void onSalirButtonClick(ActionEvent actionEvent) {
@@ -137,12 +207,12 @@ public class PersonasController implements Initializable {
 
     @FXML
     public void onListadoButtonClick(ActionEvent actionEvent) {
+        this.selectPanelVisible(2);
     }
 
     @FXML
     public void onInsertButtonClick(ActionEvent actionEvent) {
-        this.mainView.setVisible(false);
-        this.formView.setVisible(true);
+        this.selectPanelVisible(1);
     }
 
     public void onGuardarFormClick(ActionEvent actionEvent) {
@@ -173,8 +243,7 @@ public class PersonasController implements Initializable {
             this.infoLabel.setText(this.estadosLabel[2]);
             this.infoLabel.setVisible(true);
         }
-
-
+        this.guardarFormButton.setDisable(true);
 
     }
 
@@ -182,8 +251,14 @@ public class PersonasController implements Initializable {
         this.formView.setVisible(false);
         this.mainView.setVisible(true);
         this.clearFieldTexts();
+        this.guardarFormButton.setDisable(true);
     }
 
+
+    public boolean isValidoFormulario(){
+        return (isDniValido && isNombreValido && isApellidosValido
+        && isEmailValido && isEdadValido && isTelefonoValido);
+    }
 
     private void clearFieldTexts() {
         this.dniTextF.clear();
@@ -199,6 +274,24 @@ public class PersonasController implements Initializable {
         this.emailTextF.setPromptText("ppm@gmail.com");
         this.telefonoTextF.setPromptText("123789444");
         this.edadTextF.setPromptText("33");
+
+        this.dniTextF.getStyleClass().remove("my-validated-text");
+        this.dniTextF.getStyleClass().remove("my-error-text");
+
+        this.nombreTextF.getStyleClass().remove("my-validated-text");
+        this.nombreTextF.getStyleClass().remove("my-error-text");
+
+        this.apellidosTextF.getStyleClass().remove("my-validated-text");
+        this.apellidosTextF.getStyleClass().remove("my-error-text");
+
+        this.emailTextF.getStyleClass().remove("my-validated-text");
+        this.emailTextF.getStyleClass().remove("my-error-text");
+
+        this.telefonoTextF.getStyleClass().remove("my-validated-text");
+        this.telefonoTextF.getStyleClass().remove("my-error-text");
+
+        this.edadTextF.getStyleClass().remove("my-validated-text");
+        this.edadTextF.getStyleClass().remove("my-error-text");
 
         this.infoLabel.setVisible(false);
     }
@@ -224,5 +317,49 @@ public class PersonasController implements Initializable {
         return (name.length() > 3 && name.matches("[A-Z]{1}[a-z]{2,25}"));
     }
 
+    private void selectPanelVisible(int panel){
+        switch (panel){
+            case 0: //panel principal
+                this.mainView.setVisible(true);
+                this.listView.setVisible(false);
+                this.formView.setVisible(false);
+                break;
 
+            case 1: //panel formulario
+                this.mainView.setVisible(false);
+                this.listView.setVisible(false);
+                this.formView.setVisible(true);
+                break;
+
+            case 2: //panel formulario
+                this.mainView.setVisible(false);
+                this.listView.setVisible(true);
+                this.formView.setVisible(false);
+                break;
+
+            case 3: //panel formulario
+                this.mainView.setVisible(false);
+                this.listView.setVisible(false);
+                this.formView.setVisible(false);
+                break;
+
+            default:
+                this.mainView.setVisible(true);
+                this.listView.setVisible(false);
+                this.formView.setVisible(false);
+
+        }
+    }
+
+    //Eventos botones ListView
+    public void onEditarListViewButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void onEliminarListViewButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void onCancelListViewButtonClick(ActionEvent actionEvent) {
+        this.selectPanelVisible(0);
+
+    }
 }
