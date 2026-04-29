@@ -16,3 +16,7 @@
 .my-button:hover {
     -fx-background-color: #196c77; /* Color de fondo al pasar el mouse */
 }
+
+.my-error-text{
+    -fx-border-color: red;
+}

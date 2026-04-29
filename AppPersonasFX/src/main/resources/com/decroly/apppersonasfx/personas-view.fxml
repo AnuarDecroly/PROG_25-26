@@ -158,6 +158,14 @@
             </VBox>
             <HBox alignment="CENTER_RIGHT" layoutX="34.0" layoutY="570.0" prefHeight="53.0" prefWidth="583.0" spacing="20.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="22.66666666666663">
                <children>
+                  <Label fx:id="infoLabel" text="Se han guardado correctamente los datos" visible="false">
+                     <HBox.margin>
+                        <Insets right="40.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                   <Button fx:id="guardarFormButton" maxWidth="154.0" mnemonicParsing="false" onAction="#onGuardarFormClick" prefHeight="50.0" prefWidth="154.0" styleClass="my-button" text="Guardar" />
                   <Button fx:id="cancelFormButton" mnemonicParsing="false" onAction="#onCancelFormClick" styleClass="my-button" text="Cancelar" />
                </children>
