@@ -80,14 +80,13 @@ public class Persona {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Persona{");
-        sb.append("dni='").append(dni).append('\'');
+        final StringBuilder sb = new StringBuilder("DNI='");
+        sb.append(dni).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');
         sb.append(", age=").append(age);
         sb.append(", email='").append(email).append('\'');
         sb.append(", phone='").append(phone).append('\'');
-        sb.append('}');
         return sb.toString();
     }
 

@@ -21,13 +21,18 @@ import java.util.ResourceBundle;
 public class PersonasController implements Initializable {
     private Persona pp;
     private ObservableList<Persona> personas = FXCollections.observableArrayList();
+    private boolean isNewPerson =  false;
 
+    @FXML
+    private AnchorPane root;
+
+    @FXML
     private String [] estadosLabel= {"Se ha creado el registro correctamente",
             "Error al crear el registro",
-            "Se ha producido una excepción",};
+            "Se ha producido una excepción","Se ha actualizado el registro correctamente"};
 
     //Variables para poner el boton enable
-    boolean isDniValido = false, isNombreValido = false, isApellidosValido = false,
+    private boolean isDniValido = false, isNombreValido = false, isApellidosValido = false,
     isEmailValido = false, isTelefonoValido = false, isEdadValido = false;
 
     //Paneles
@@ -52,11 +57,22 @@ public class PersonasController implements Initializable {
     @FXML
     private TextField edadTextF;
 
+    //Label
     @FXML
     private Label infoLabel;
 
     @FXML
+    private Label labelFormTitle;
+
+    //Buttons
+    @FXML
     private Button guardarFormButton;
+
+    @FXML
+    private Button editarListViewButton;
+
+    @FXML
+    private Button eliminarListViewButton;
 
     @FXML
     private ListView<Persona> personasListView;
@@ -66,10 +82,15 @@ public class PersonasController implements Initializable {
         //Codigo que queremos o necesitamos que se ejecute al principio
         this.selectPanelVisible(0);
 
+        //Limpio los campos de las cajas de texto
         this.clearFieldTexts();
-        this.guardarFormButton.setDisable(true);
 
-        //Insertar listerners a las propiedades de focus tesxtfields
+        //Deshabilito los botones necesarios
+        this.guardarFormButton.setDisable(true);
+        this.editarListViewButton.setDisable(true);
+        this.eliminarListViewButton.setDisable(true);
+
+        //Insertar listerners a las propiedades de focus textsfields
         this.dniTextF.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue){
                 if(!this.validateDni(dniTextF.getText())){
@@ -194,6 +215,19 @@ public class PersonasController implements Initializable {
             this.infoLabel.setVisible(true);
         });
 
+        //Añadir listener a la propiedad de elemento seleccionado de la lista
+        this.personasListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.pp = newValue;
+            if(newValue != null){
+                this.editarListViewButton.setDisable(false);
+                this.eliminarListViewButton.setDisable(false);
+
+
+            }else{
+                this.editarListViewButton.setDisable(true);
+                this.eliminarListViewButton.setDisable(true);
+            }
+        });
     }
 
     @FXML
@@ -207,44 +241,58 @@ public class PersonasController implements Initializable {
 
     @FXML
     public void onListadoButtonClick(ActionEvent actionEvent) {
+        this.loadPersonInListView();
         this.selectPanelVisible(2);
     }
 
     @FXML
     public void onInsertButtonClick(ActionEvent actionEvent) {
+        this.isNewPerson = true;
+        this.configureFormView();
         this.selectPanelVisible(1);
     }
 
     public void onGuardarFormClick(ActionEvent actionEvent) {
         //Guardar en el formulario, insertar en el SQL
-        try {
-            this.pp = Persona.builder()
-                    .dni(this.dniTextF.getText())
-                    .name(this.nombreTextF.getText())
-                    .surname(this.apellidosTextF.getText())
-                    .email(this.emailTextF.getText())
-                    .age(Integer.parseInt(this.edadTextF.getText()))
-                    .phone(this.telefonoTextF.getText())
-                    .build();
+        this.pp = Persona.builder()
+                .dni(this.dniTextF.getText())
+                .name(this.nombreTextF.getText())
+                .surname(this.apellidosTextF.getText())
+                .email(this.emailTextF.getText())
+                .age(Integer.parseInt(this.edadTextF.getText()))
+                .phone(this.telefonoTextF.getText())
+                .build();
 
-            if (SQLAccessPersona.createPersona(pp)) {
-                this.clearFieldTexts();
-                this.infoLabel.setText(this.estadosLabel[0]);
-                this.infoLabel.setVisible(true);
-            } else {
-                this.infoLabel.setText(this.estadosLabel[1]);
+        if(this.isNewPerson){
+            try {
+                if (SQLAccessPersona.createPersona(pp)) {
+                    this.clearFieldTexts();
+                    this.infoLabel.setText(this.estadosLabel[0]);
+                    this.infoLabel.setVisible(true);
+                } else {
+                    this.infoLabel.setText(this.estadosLabel[1]);
+                    this.infoLabel.setVisible(true);
+                }
+            }catch(Exception e){
+                this.infoLabel.setText(this.estadosLabel[2]);
                 this.infoLabel.setVisible(true);
             }
-        }catch(NumberFormatException e){
-            this.edadTextF.setText("");
-            this.edadTextF.setPromptText("Escriba un numero");
-
-        }catch(Exception e){
-            this.infoLabel.setText(this.estadosLabel[2]);
-            this.infoLabel.setVisible(true);
+            this.guardarFormButton.setDisable(true);
+        }else{
+            try{
+                if (SQLAccessPersona.updatePersona(this.pp)) {
+                    this.clearFieldTexts();
+                    this.infoLabel.setText(this.estadosLabel[4]);
+                    this.infoLabel.setVisible(true);
+                } else {
+                    this.infoLabel.setText(this.estadosLabel[1]);
+                    this.infoLabel.setVisible(true);
+                }
+            } catch (Exception e) {
+                this.infoLabel.setText(this.estadosLabel[2]);
+                this.infoLabel.setVisible(true);
+            }
         }
-        this.guardarFormButton.setDisable(true);
-
     }
 
     public void onCancelFormClick(ActionEvent actionEvent) {
@@ -254,10 +302,45 @@ public class PersonasController implements Initializable {
         this.guardarFormButton.setDisable(true);
     }
 
+    //Eventos botones ListView
+    public void onEditarListViewButtonClick(ActionEvent actionEvent) {
+        if(this.pp != null){
+            // Cargar datos en el formulario y configurar que estamos en editar
+            this.isNewPerson = false;
+            this.configureFormView();
+            this.selectPanelVisible(1);
 
+        }
+    }
+
+    public void onEliminarListViewButtonClick(ActionEvent actionEvent) {
+        if(this.pp != null){
+            SQLAccessPersona.deletePersonaByDNI(this.pp.getDni());
+            this.loadPersonInListView();
+        }
+    }
+
+    public void onCancelListViewButtonClick(ActionEvent actionEvent) {
+        this.selectPanelVisible(0);
+
+    }
+
+    // Metodos validaciones y auxiliares
     public boolean isValidoFormulario(){
         return (isDniValido && isNombreValido && isApellidosValido
         && isEmailValido && isEdadValido && isTelefonoValido);
+    }
+
+    public void loadPersonInListView(){
+
+        //Limpiar los datos anteriores de la ObservableList
+        this.personas.clear();
+        //Llamar a SQL y traer todas las personas
+        List<Persona> misPersonas = SQLAccessPersona.getAllpersonas();
+        //Cargo en el OnservableList los datos
+        this.personas.addAll(misPersonas);
+        //Defino en el ListView los elementos (el Observable List)
+        this.personasListView.setItems(this.personas);
     }
 
     private void clearFieldTexts() {
@@ -301,7 +384,7 @@ public class PersonasController implements Initializable {
     }
 
     private boolean validateAge(String age){
-        return age.matches("[1-9]{1,3}");
+        return age.matches("[0-9]{1,3}");
     }
 
     private boolean validateEmail(String email){
@@ -310,7 +393,7 @@ public class PersonasController implements Initializable {
     }
 
     private boolean validatePhone(String phone){
-        return phone.matches("[1-9]{9}");
+        return phone.matches("[6-9]{1}[0-9]{8}");
     }
 
     private boolean validateName(String name){
@@ -351,15 +434,23 @@ public class PersonasController implements Initializable {
         }
     }
 
-    //Eventos botones ListView
-    public void onEditarListViewButtonClick(ActionEvent actionEvent) {
+    private void configureFormView(){
+        if(isNewPerson){
+            this.labelFormTitle.setText("Insertar nueva Persona");
+        }
+        else{
+            this.labelFormTitle.setText("Actualizar Persona");
+            if(pp != null){
+                this.dniTextF.setText(pp.getDni());
+                this.nombreTextF.setText(pp.getName());
+                this.apellidosTextF.setText(pp.getSurname());
+                this.emailTextF.setText(pp.getEmail());
+                this.edadTextF.setText(String.valueOf(pp.getAge()));
+                this.telefonoTextF.setText(String.valueOf(pp.getPhone()));
+            }
+
+        }
     }
 
-    public void onEliminarListViewButtonClick(ActionEvent actionEvent) {
-    }
 
-    public void onCancelListViewButtonClick(ActionEvent actionEvent) {
-        this.selectPanelVisible(0);
-
-    }
 }

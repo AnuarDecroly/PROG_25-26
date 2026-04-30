@@ -27,7 +27,7 @@
     -fx-background-radius: 10;
 }
 
-.my-button-my-button-secondary:hover {
+.my-button-secondary:hover {
     -fx-background-color: #196c77; /* Color de fondo al pasar el mouse */
 }
 
@@ -42,4 +42,18 @@
 .mi-title-view{
     -fx-text-fill: white;
     -fx-font-size: 40;
+
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #999b9c; /* Color alterno */
+    -fx-text-fill: black;
+}
+.list-view .list-cell:odd {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+.list-view .list-cell:filled:selected {
+    -fx-background-color: #196c77; /* Color de selección */
+    -fx-text-fill: white;
 }
